@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, type ReactNode, type ChangeEvent, type FormEvent } from 'react'
 import {
   ArrowRight, ArrowUpRight, Menu, X, Code2, Cloud, ShieldCheck,
   Smartphone, Database, Workflow, ChevronDown, CheckCircle2,
@@ -47,7 +46,7 @@ function Footer() {
   return <footer className="footer"><div className="container footer-main"><div className="footer-brand"><Brand/><p>We turn ideas into useful digital experiences, reliable systems and technology that helps organisations move forward.</p><a className="footer-email" href="mailto:info@grobaltech.com">info@grobaltech.com <ArrowUpRight size={15}/></a></div><div><h4>Explore</h4><a href="#about">About us</a><a href="#services">Our services</a><a href="#work">Selected work</a><a href="#contact">Contact</a></div><div><h4>What we do</h4><a href="#services">Web development</a><a href="#services">Mobile applications</a><a href="#services">Cloud solutions</a><a href="#services">Business automation</a></div><div><h4>Get in touch</h4><p><MapPin size={15}/> Kampala, Uganda</p><p><Mail size={15}/> info@grobaltech.com</p><p><Globe2 size={15}/> Serving clients everywhere</p></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} Grobaltech Technologies. All rights reserved.</span><span>Designed with purpose. Built for progress.</span></div></footer>
 }
 
-function Eyebrow({ children }: { children: React.ReactNode }) {
+function Eyebrow({ children }: { children: ReactNode }) {
   return <div className="eyebrow"><span/>{children}</div>
 }
 
@@ -69,8 +68,8 @@ function ArrowDownIcon() { return <ArrowRight size={16} className="rotate-down"/
 function ContactForm() {
   const [sent, setSent] = useState(false)
   const [form, setForm] = useState({name:'',email:'',service:'',message:''})
-  const update = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setForm({...form,[e.target.name]:e.target.value})
-  const submit = (e: React.FormEvent) => {
+  const update = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setForm({...form,[e.target.name]:e.target.value})
+  const submit = (e: FormEvent) => {
     e.preventDefault()
     const subject = encodeURIComponent('Website enquiry from '+form.name)
     const body = encodeURIComponent('Name: '+form.name+'\nEmail: '+form.email+'\nService: '+form.service+'\n\n'+form.message)
