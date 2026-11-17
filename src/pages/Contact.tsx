@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { Mail, MapPin, Phone, Send, CheckCircle2 } from 'lucide-react'
+import { Mail, MapPin, Globe2, Send, CheckCircle2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 export default function Contact() {
@@ -32,7 +32,7 @@ export default function Contact() {
           <div className="contact-page-info"><span className="mini-kicker">GET IN TOUCH</span><h2>Good projects begin with <em>a conversation.</em></h2><p>Tell us a little about what you are looking to achieve. We welcome enquiries about websites, software, digital platforms, integrations and technology support.</p>
             <div className="contact-info-item"><span><Mail /></span><div><b>Email</b><a href="mailto:info@grobaltech.com">info@grobaltech.com</a></div></div>
             <div className="contact-info-item"><span><MapPin /></span><div><b>Location</b><small>Kampala, Uganda</small></div></div>
-            <div className="contact-info-item"><span><GlobeIcon /></span><div><b>Reach</b><small>Working with organisations wherever they are</small></div></div>
+            <div className="contact-info-item"><span><Globe2 /></span><div><b>Reach</b><small>Working with organisations wherever they are</small></div></div>
           </div>
           {sent ? <div className="contact-success"><CheckCircle2 size={42} /><h2>Your email draft is ready.</h2><p>Your email application should open with the enquiry details. Please send it from there so our team can receive it.</p><button className="underlined-link" onClick={() => setSent(false)}>Prepare another enquiry</button></div> :
             <form className="contact-page-form" onSubmit={submit}><span className="mini-kicker">PROJECT ENQUIRY</span><h3>Tell us what you have in mind</h3><div className="form-two"><label>Full name<input required name="name" placeholder="Your name" /></label><label>Email address<input required type="email" name="email" placeholder="you@example.com" /></label></div><label>What can we help with?<select required name="service" defaultValue=""><option value="" disabled>Select an area</option><option>Website or web application</option><option>Mobile application</option><option>Business software or automation</option><option>Cloud and infrastructure</option><option>Consultation or support</option><option>Other</option></select></label><label>Project details<textarea required name="message" rows={6} placeholder="A little about your goals, requirements and timeline..." /></label><button className="button form-submit" type="submit">Prepare enquiry <Send size={16} /></button><small className="form-note">This opens your email application; it does not submit data to a server.</small></form>
@@ -41,8 +41,4 @@ export default function Contact() {
       </section>
     </main>
   )
-}
-
-function GlobeIcon() {
-  return <Phone />
 }
