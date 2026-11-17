@@ -37,6 +37,9 @@ The homepage and portfolio currently work without Supabase credentials. Optional
 - Responsive top information strip, sticky navigation and mobile menu
 - Homepage hero, company introduction, services, approach and selected project sections
 - Engagement models and interactive FAQ disclosures
+- Company profile and principles page
+- Services overview and individual service detail routes
+- Projects index and individual project case-study routes
 - Solutions portfolio and individual solution detail routes
 - Dedicated project enquiry page
 - Branded favicon, page metadata and Cloudflare Pages SPA fallback
