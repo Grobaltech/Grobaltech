@@ -24,3 +24,5 @@
 @media(max-width:700px){.service-detail-grid{grid-template-columns:1fr}.service-detail-card{min-height:0}.service-detail-card p{min-height:0}.service-detail-layout,.about-page-grid{grid-template-columns:1fr;gap:35px}.service-deliverables{padding:25px 19px}.about-page-art{height:300px}.about-art-symbol{font-size:115px}.principles-grid,.projects-page-grid{grid-template-columns:1fr}.principles-grid article{min-height:0}.project-page-image{height:230px}.project-page-card>p{min-height:0}}
 
 :focus-visible{outline:3px solid #a99aff;outline-offset:3px}button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none}
+
+.form-error{padding:11px 13px;background:#fff1f0;border-left:2px solid #cf4a43;color:#a3332e;font-size:10px;line-height:1.6}.form-success{padding:11px 13px;background:#eef8f0;border-left:2px solid #4c9b61;color:#286c3b;font-size:10px;line-height:1.6}.button:disabled{opacity:.65;cursor:wait;transform:none;box-shadow:none}
