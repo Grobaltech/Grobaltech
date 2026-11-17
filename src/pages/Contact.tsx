@@ -31,7 +31,7 @@ export default function Contact() {
         <div className="container contact-page-grid">
           <div className="contact-page-info"><span className="mini-kicker">GET IN TOUCH</span><h2>Good projects begin with <em>a conversation.</em></h2><p>Tell us a little about what you are looking to achieve. We welcome enquiries about websites, software, digital platforms, integrations and technology support.</p>
             <div className="contact-info-item"><span><Mail /></span><div><b>Email</b><a href="mailto:info@grobaltech.com">info@grobaltech.com</a></div></div>
-            <div className="contact-info-item"><span><MapPin /></span><div><b>Location</b><small>Kampala, Uganda</small></div></div>
+            <div className="contact-info-item"><span><MapPin /></span><div><b>Location</b><small>Uganda</small></div></div>
             <div className="contact-info-item"><span><Globe2 /></span><div><b>Reach</b><small>Working with organisations wherever they are</small></div></div>
           </div>
           {sent ? <div className="contact-success"><CheckCircle2 size={42} /><h2>Your email draft is ready.</h2><p>Your email application should open with the enquiry details. Please send it from there so our team can receive it.</p><button className="underlined-link" onClick={() => setSent(false)}>Prepare another enquiry</button></div> :
