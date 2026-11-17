@@ -1,18 +1,21 @@
 import { useState, type ReactNode, type ChangeEvent, type FormEvent } from 'react'
+import { Route, Routes } from 'react-router-dom'
+import Products from './pages/Products'
+import ProductDetail from './pages/ProductDetail'
+import Contact from './pages/Contact'
 import {
   ArrowRight, ArrowUpRight, Menu, X, Code2, Cloud, ShieldCheck,
-  Smartphone, Database, Workflow, ChevronDown, CheckCircle2,
-  Mail, Phone, MapPin, Globe2, Play, Sparkles, MonitorSmartphone,
-  Layers3, Zap, Send
+  Smartphone, Database, Workflow, CheckCircle2,
+  Mail, Phone, MapPin, Globe2, Play, Sparkles, Send
 } from 'lucide-react'
 
 const nav = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Solutions', href: '#solutions' },
-  { label: 'Our Work', href: '#work' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/#about' },
+  { label: 'Services', href: '/#services' },
+  { label: 'Solutions', href: '/products' },
+  { label: 'Our Work', href: '/#work' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 const services = [
@@ -31,19 +34,19 @@ const projects = [
 ]
 
 function Brand() {
-  return <a href="#home" className="brand" aria-label="Grobaltech home"><span className="brand-mark">G<span>.</span></span><span className="brand-name">GROBALTECH<small>TECHNOLOGIES</small></span></a>
+  return <a href="/" className="brand" aria-label="Grobaltech home"><span className="brand-mark">G<span>.</span></span><span className="brand-name">GROBALTECH<small>TECHNOLOGIES</small></span></a>
 }
 
 function Header() {
   const [open, setOpen] = useState(false)
   return <>
     <div className="topline"><div className="container topline-inner"><span>Technology that moves business forward.</span><div><a href="mailto:info@grobaltech.com"><Mail size={14}/> info@grobaltech.com</a><span className="topline-divider"/><a href="tel:+256"><Phone size={14}/> Talk to our team</a></div></div></div>
-    <header className="site-header"><div className="container nav-inner"><Brand/><nav className={open ? 'main-nav nav-open' : 'main-nav'}>{nav.map(item => <a key={item.href} href={item.href} onClick={() => setOpen(false)}>{item.label}</a>)}</nav><a className="button button-small nav-cta" href="#contact">Let's Talk <ArrowUpRight size={16}/></a><button className="mobile-toggle" aria-label="Toggle navigation" onClick={() => setOpen(!open)}>{open ? <X/> : <Menu/>}</button></div></header>
+    <header className="site-header"><div className="container nav-inner"><Brand/><nav className={open ? 'main-nav nav-open' : 'main-nav'}>{nav.map(item => <a key={item.href} href={item.href} onClick={() => setOpen(false)}>{item.label}</a>)}</nav><a className="button button-small nav-cta" href="/contact">Let's Talk <ArrowUpRight size={16}/></a><button className="mobile-toggle" aria-label="Toggle navigation" onClick={() => setOpen(!open)}>{open ? <X/> : <Menu/>}</button></div></header>
   </>
 }
 
 function Footer() {
-  return <footer className="footer"><div className="container footer-main"><div className="footer-brand"><Brand/><p>We turn ideas into useful digital experiences, reliable systems and technology that helps organisations move forward.</p><a className="footer-email" href="mailto:info@grobaltech.com">info@grobaltech.com <ArrowUpRight size={15}/></a></div><div><h4>Explore</h4><a href="#about">About us</a><a href="#services">Our services</a><a href="#work">Selected work</a><a href="#contact">Contact</a></div><div><h4>What we do</h4><a href="#services">Web development</a><a href="#services">Mobile applications</a><a href="#services">Cloud solutions</a><a href="#services">Business automation</a></div><div><h4>Get in touch</h4><p><MapPin size={15}/> Kampala, Uganda</p><p><Mail size={15}/> info@grobaltech.com</p><p><Globe2 size={15}/> Serving clients everywhere</p></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} Grobaltech Technologies. All rights reserved.</span><span>Designed with purpose. Built for progress.</span></div></footer>
+  return <footer className="footer"><div className="container footer-main"><div className="footer-brand"><Brand/><p>We turn ideas into useful digital experiences, reliable systems and technology that helps organisations move forward.</p><a className="footer-email" href="mailto:info@grobaltech.com">info@grobaltech.com <ArrowUpRight size={15}/></a></div><div><h4>Explore</h4><a href="/#about">About us</a><a href="/#services">Our services</a><a href="/products">Solutions</a><a href="/contact">Contact</a></div><div><h4>What we do</h4><a href="/#services">Web development</a><a href="/#services">Mobile applications</a><a href="/#services">Cloud solutions</a><a href="/#services">Business automation</a></div><div><h4>Get in touch</h4><p><MapPin size={15}/> Kampala, Uganda</p><p><Mail size={15}/> info@grobaltech.com</p><p><Globe2 size={15}/> Serving clients everywhere</p></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} Grobaltech Technologies. All rights reserved.</span><span>Designed with purpose. Built for progress.</span></div></footer>
 }
 
 function Eyebrow({ children }: { children: ReactNode }) {
@@ -59,7 +62,10 @@ function Home() {
     <section className="dark-band" id="solutions"><div className="container dark-band-inner"><div><Eyebrow>THE GROBALTECH APPROACH</Eyebrow><h2>Good technology is not just what it does. <em>It is what it makes possible.</em></h2></div><div className="approach-list"><div><span>01</span><p><b>Understand</b><small>We listen, ask better questions and define the real opportunity.</small></p></div><div><span>02</span><p><b>Design</b><small>We shape an experience and solution around your people and goals.</small></p></div><div><span>03</span><p><b>Build & improve</b><small>We deliver, learn and keep making the solution better.</small></p></div></div></div></section>
     <section className="section work-section" id="work"><div className="container"><div className="section-heading"><div><Eyebrow>SELECTED WORK</Eyebrow><h2>Ideas turned into<br/><em>working solutions.</em></h2></div><p>Every project starts with a different challenge. Our focus stays the same: build something useful, thoughtful and dependable.</p></div><div className="projects-grid">{projects.map((p,i)=><article className="project-card" key={p.title}><a className="project-image" href="#contact"><img src={p.image} alt={p.title}/><span><ArrowUpRight size={20}/></span></a><div className="project-meta">{p.type}<span>0{i+1}</span></div><h3>{p.title}</h3><p>{p.desc}</p></article>)}</div><div className="work-foot"><span>More good work starts with a conversation.</span><a className="underlined-link" href="#contact">Discuss your project <ArrowRight size={17}/></a></div></div></section>
     <section className="stats-band"><div className="container stats-grid"><div><span>01</span><b>One committed partner</b><small>From discovery to delivery.</small></div><div><span>02</span><b>Connected expertise</b><small>Design, engineering and strategy.</small></div><div><span>03</span><b>Solutions that grow</b><small>Built for change and progress.</small></div><div><span>04</span><b>People at the centre</b><small>Technology that serves real needs.</small></div></div></section>
-    <section className="section contact-section" id="contact"><div className="container contact-panel"><div className="contact-copy"><Eyebrow>LET'S BUILD SOMETHING</Eyebrow><h2>Your next big idea deserves <em>the right technology.</em></h2><p>Tell us what you are working towards. We would love to explore how we can help make it happen.</p><div className="contact-details"><a href="mailto:info@grobaltech.com"><Mail size={17}/> info@grobaltech.com</a><a href="tel:+256"><Phone size={17}/> Request a call back</a></div></div><ContactForm/></div></section>
+
+    <section className="section engagement-section" id="engagement"><div className="container"><div className="section-heading"><div><Eyebrow>WAYS TO WORK TOGETHER</Eyebrow><h2>A clear path from<br/><em>idea to impact.</em></h2></div><p>Different challenges call for different ways of working. We shape the engagement around the outcome you need, the scope of work and the people involved.</p></div><div className="engagement-grid"><article><span>01 / PROJECT DELIVERY</span><h3>Build a defined solution</h3><p>For a website, application, platform or integration with a clear scope and delivery milestones.</p><a href="/contact">Discuss a project <ArrowUpRight size={16}/></a></article><article className="engagement-featured"><span>02 / CONTINUOUS PARTNERSHIP</span><h3>Improve as you grow</h3><p>Ongoing development, maintenance and technical support as your organisation's needs evolve.</p><a href="/contact">Explore a partnership <ArrowUpRight size={16}/></a></article><article><span>03 / ADVISORY & DISCOVERY</span><h3>Find the right next step</h3><p>Technical discovery and practical guidance to help define priorities before committing to a build.</p><a href="/contact">Start a conversation <ArrowUpRight size={16}/></a></article></div></div></section>
+    <section className="section faq-section"><div className="container faq-grid"><div><Eyebrow>COMMON QUESTIONS</Eyebrow><h2>Good questions lead<br/>to <em>better solutions.</em></h2><p>Not sure where to begin? Here are a few things people often ask before starting a technology project with us.</p><a className="underlined-link" href="/contact">Ask us something else <ArrowRight size={16}/></a></div><div className="faq-list"><details open><summary>What kind of projects does Grobaltech take on?</summary><p>We work on business websites, web and mobile applications, workflow automation, cloud deployments, integrations and custom software systems.</p></details><details><summary>Can you improve an existing website or system?</summary><p>Yes. We can review an existing digital product, identify improvement opportunities and agree on a practical scope for updates, integrations or ongoing support.</p></details><details><summary>How do we get started?</summary><p>Send us a short description of your goals through the contact form. We can then arrange a discussion to understand the requirements and possible next steps.</p></details><details><summary>Do you work with organisations outside Uganda?</summary><p>Yes. We are based in Kampala and can work remotely with organisations in other locations.</p></details></div></div></section>
+\n    <section className="section contact-section" id="contact"><div className="container contact-panel"><div className="contact-copy"><Eyebrow>LET'S BUILD SOMETHING</Eyebrow><h2>Your next big idea deserves <em>the right technology.</em></h2><p>Tell us what you are working towards. We would love to explore how we can help make it happen.</p><div className="contact-details"><a href="mailto:info@grobaltech.com"><Mail size={17}/> info@grobaltech.com</a><a href="tel:+256"><Phone size={17}/> Request a call back</a></div></div><ContactForm/></div></section>
   </>
 }
 
@@ -80,5 +86,11 @@ function ContactForm() {
 }
 
 export default function App() {
-  return <><Header/><main><Home/></main><Footer/></>
+  return <Routes>
+    <Route path="/" element={<><Header/><main><Home/></main><Footer/></>} />
+    <Route path="/products" element={<><Header/><Products/><Footer/></>} />
+    <Route path="/products/:slug" element={<><Header/><ProductDetail/><Footer/></>} />
+    <Route path="/contact" element={<><Header/><Contact/><Footer/></>} />
+    <Route path="*" element={<><Header/><main className="inner-page"><section className="section"><div className="container not-found"><h1>Page not found</h1><p>The page may have moved or the address may be incorrect.</p><a className="button" href="/">Return home <ArrowRight size={16}/></a></div></section></main><Footer/></>} />
+  </Routes>
 }
