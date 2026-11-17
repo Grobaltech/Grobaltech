@@ -3,6 +3,11 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import Products from './pages/Products'
 import ProductDetail from './pages/ProductDetail'
 import Contact from './pages/Contact'
+import About from './pages/About'
+import Services from './pages/Services'
+import ServiceDetail from './pages/ServiceDetail'
+import Projects from './pages/Projects'
+import ProjectDetail from './pages/ProjectDetail'
 import {
   ArrowRight, ArrowUpRight, Menu, X, Code2, Cloud, ShieldCheck,
   Smartphone, Database, Workflow, CheckCircle2,
@@ -11,10 +16,10 @@ import {
 
 const nav = [
   { label: 'Home', href: '/' },
-  { label: 'About', href: '/#about' },
-  { label: 'Services', href: '/#services' },
+  { label: 'About', href: '/about' },
+  { label: 'Services', href: '/services' },
   { label: 'Solutions', href: '/products' },
-  { label: 'Our Work', href: '/#work' },
+  { label: 'Our Work', href: '/projects' },
   { label: 'Contact', href: '/contact' },
 ]
 
@@ -46,7 +51,7 @@ function Header() {
 }
 
 function Footer() {
-  return <footer className="footer"><div className="container footer-main"><div className="footer-brand"><Brand/><p>We turn ideas into useful digital experiences, reliable systems and technology that helps organisations move forward.</p><a className="footer-email" href="mailto:info@grobaltech.com">info@grobaltech.com <ArrowUpRight size={15}/></a></div><div><h4>Explore</h4><a href="/#about">About us</a><a href="/#services">Our services</a><a href="/products">Solutions</a><a href="/contact">Contact</a></div><div><h4>What we do</h4><a href="/#services">Web development</a><a href="/#services">Mobile applications</a><a href="/#services">Cloud solutions</a><a href="/#services">Business automation</a></div><div><h4>Get in touch</h4><p><MapPin size={15}/> Uganda</p><p><Mail size={15}/> info@grobaltech.com</p><p><Globe2 size={15}/> Serving clients everywhere</p></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} Grobaltech Technologies. All rights reserved.</span><span>Designed with purpose. Built for progress.</span></div></footer>
+  return <footer className="footer"><div className="container footer-main"><div className="footer-brand"><Brand/><p>We turn ideas into useful digital experiences, reliable systems and technology that helps organisations move forward.</p><a className="footer-email" href="mailto:info@grobaltech.com">info@grobaltech.com <ArrowUpRight size={15}/></a></div><div><h4>Explore</h4><a href="/about">About us</a><a href="/services">Our services</a><a href="/projects">Projects</a><a href="/contact">Contact</a></div><div><h4>What we do</h4><a href="/services">Web development</a><a href="/services">Mobile applications</a><a href="/services">Cloud solutions</a><a href="/services">Business automation</a></div><div><h4>Get in touch</h4><p><MapPin size={15}/> Uganda</p><p><Mail size={15}/> info@grobaltech.com</p><p><Globe2 size={15}/> Serving clients everywhere</p></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} Grobaltech Technologies. All rights reserved.</span><span>Designed with purpose. Built for progress.</span></div></footer>
 }
 
 function Eyebrow({ children }: { children: ReactNode }) {
@@ -103,6 +108,11 @@ export default function App() {
   }, [location.pathname])
   return <Routes>
     <Route path="/" element={<><Header/><main><Home/></main><Footer/></>} />
+    <Route path="/about" element={<><Header/><About/><Footer/></>} />
+    <Route path="/services" element={<><Header/><Services/><Footer/></>} />
+    <Route path="/services/:slug" element={<><Header/><ServiceDetail/><Footer/></>} />
+    <Route path="/projects" element={<><Header/><Projects/><Footer/></>} />
+    <Route path="/projects/:slug" element={<><Header/><ProjectDetail/><Footer/></>} />
     <Route path="/products" element={<><Header/><Products/><Footer/></>} />
     <Route path="/products/:slug" element={<><Header/><ProductDetail/><Footer/></>} />
     <Route path="/contact" element={<><Header/><Contact/><Footer/></>} />
