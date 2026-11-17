@@ -18,7 +18,7 @@ The uploaded `grobaltech-app` archive provides React 19, TypeScript, Vite, Tailw
 - Engagement models and accessible native FAQ disclosures.
 - Scroll-triggered section reveals with reduced-motion support.
 - Solutions portfolio page and individual solution detail route.
-- Dedicated contact page and enquiry form that opens an email draft.
+- Dedicated contact page and enquiry form with optional Supabase lead persistence and email fallback.
 - Grobaltech favicon, metadata, Cloudflare Pages configuration and SPA fallback.
 
 ### Still to implement
@@ -26,7 +26,7 @@ The uploaded `grobaltech-app` archive provides React 19, TypeScript, Vite, Tailw
 - Detailed project outcomes and approved case-study evidence.
 - Blog/news listing and article pages.
 - Approved company logo, real project imagery and final brand assets.
-- Secure enquiry persistence and a protected content-management interface.
+- Protected content-management interface and admin authentication screens.
 - Privacy policy, terms, accessibility and SEO refinements.
 
 ## Build sequence
