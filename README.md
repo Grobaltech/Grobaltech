@@ -37,12 +37,13 @@ The homepage and portfolio currently work without Supabase credentials. Optional
 - Responsive top information strip, sticky navigation and mobile menu
 - Homepage hero, company introduction, services, approach and selected project sections
 - Engagement models and interactive FAQ disclosures
-- Company profile and principles page
-- Services overview and individual service detail routes
-- Projects index and individual project case-study routes
+- Company profile and principles page (`/about`)
+- Services overview and individual service detail routes (`/services`)
+- Projects index and individual project case-study routes (`/projects`)
 - Solutions portfolio and individual solution detail routes
 - Dedicated project enquiry page
-- Branded favicon, page metadata and Cloudflare Pages SPA fallback
+- Supplied Grobaltech lightning emblem in the shared header and favicon
+- Page metadata, keyboard focus styling, Cloudflare Pages SPA fallback and security headers
 - Scroll-triggered section reveals with reduced-motion support
 
 ## Current limitations / next build stages
