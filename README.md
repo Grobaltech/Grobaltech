@@ -31,7 +31,15 @@ npm run preview
 - `wrangler.toml` records the Pages build output directory.
 
 ## Environment
-The homepage and portfolio currently work without Supabase credentials. Optional public Supabase settings are documented in `.env.example`. Never expose a Supabase service-role key in a `VITE_*` variable.
+The homepage and portfolio work without Supabase credentials. Optional public Supabase settings are documented in `.env.example`.
+
+To enable saved enquiries:
+1. Create or select the Supabase project for this website.
+2. Run `supabase/migrations/202611180001_initial_website_cms.sql` in its SQL Editor.
+3. Create the first administrator through Supabase Auth, then run the role-assignment SQL at the bottom of the migration using that user's Auth UUID.
+4. Add `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` to the local environment and Cloudflare Pages environment settings.
+
+The browser uses only the public anon/publishable key. Never expose a Supabase service-role key in a `VITE_*` variable. Without Supabase configuration, the contact forms open an email draft instead of pretending to store the enquiry.
 
 ## Implemented
 - Responsive top information strip, sticky navigation and mobile menu
@@ -47,8 +55,8 @@ The homepage and portfolio currently work without Supabase credentials. Optional
 - Scroll-triggered section reveals with reduced-motion support
 
 ## Current limitations / next build stages
-- Enquiry forms currently prepare an email draft; they do not yet persist enquiries.
-- Portfolio content and imagery are currently maintained in source files; a secure CMS is a later stage.
+- Enquiry forms can persist enquiries after the Supabase migration and public environment variables are configured; otherwise they prepare an email draft.
+- Portfolio content and imagery are currently maintained in source files; the initial RLS-protected content schema is prepared, but the CMS interface is a later stage.
 - Replace temporary stock photography with approved Grobaltech/project imagery.
 - Add service detail, project case-study, team, news/blog and privacy/terms pages.
 - Run a dependency install and production build in the deployment environment before publishing.
