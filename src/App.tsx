@@ -1,5 +1,5 @@
-import { useState, type ReactNode, type ChangeEvent, type FormEvent } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { useEffect, useState, type ReactNode, type ChangeEvent, type FormEvent } from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import Products from './pages/Products'
 import ProductDetail from './pages/ProductDetail'
 import Contact from './pages/Contact'
@@ -86,6 +86,21 @@ function ContactForm() {
 }
 
 export default function App() {
+  const location = useLocation()
+  useEffect(() => {
+    document.documentElement.classList.add('motion-ready')
+    const targets = document.querySelectorAll<HTMLElement>('main > .section, main > .page-hero, main > .dark-band, main > .stats-band, main > .intro-strip')
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible')
+          observer.unobserve(entry.target)
+        }
+      })
+    }, { threshold: 0.08, rootMargin: '0px 0px -35px 0px' })
+    targets.forEach((target) => observer.observe(target))
+    return () => observer.disconnect()
+  }, [location.pathname])
   return <Routes>
     <Route path="/" element={<><Header/><main><Home/></main><Footer/></>} />
     <Route path="/products" element={<><Header/><Products/><Footer/></>} />
