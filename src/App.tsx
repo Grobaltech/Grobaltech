@@ -127,9 +127,53 @@ function ContactForm() {
 export default function App() {
   const location = useLocation()
   useEffect(() => {
+    const root = document.documentElement
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const main = document.querySelector<HTMLElement>('main')
+    if (reduceMotion) {
+      root.classList.remove('motion-ready')
+      return
+    }
+
+    root.classList.add('motion-ready')
+    if (main) {
+      main.classList.remove('page-enter')
+      void main.offsetWidth
+      main.classList.add('page-enter')
+    }
+
     if (!('IntersectionObserver' in window)) return
-    document.documentElement.classList.add('motion-ready')
-    const targets = document.querySelectorAll<HTMLElement>('main > .section, main > .page-hero, main > .dark-band, main > .stats-band, main > .intro-strip')
+    const revealSelector = [
+      'main > .section',
+      'main > .page-hero',
+      'main > .dark-band',
+      'main > .stats-band',
+      'main > .intro-strip',
+      'main .section-heading',
+      'main .about-grid > *',
+      'main .services-grid > *',
+      'main .projects-grid > *',
+      'main .approach-list > *',
+      'main .stats-grid > *',
+      'main .engagement-grid > *',
+      'main .faq-list details',
+      'main .page-hero .container > *',
+      'main .solution-row',
+      'main .detail-grid > *',
+      'main .service-detail-card',
+      'main .principles-grid > *',
+      'main .projects-page-card',
+      'main .contact-panel > *',
+      'main .contact-page-grid > *',
+      'main .about-page-grid > *',
+      'main .service-detail-layout > *',
+      'main .portfolio-callout'
+    ].join(', ')
+    const targets = Array.from(document.querySelectorAll<HTMLElement>(revealSelector))
+    targets.forEach((target, index) => {
+      target.classList.add('reveal-item')
+      target.style.setProperty('--reveal-delay', `${(index % 4) * 85}ms`)
+    })
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -137,7 +181,7 @@ export default function App() {
           observer.unobserve(entry.target)
         }
       })
-    }, { threshold: 0.08, rootMargin: '0px 0px -35px 0px' })
+    }, { threshold: 0.12, rootMargin: '0px 0px -45px 0px' })
     targets.forEach((target) => observer.observe(target))
     return () => observer.disconnect()
   }, [location.pathname])
