@@ -1,75 +1,64 @@
 # Grobaltech website — implementation plan
 
 ## Goal
-Build a polished, responsive Grobaltech Technologies website that closely follows the visual language, page structure and visitor experience of the Achrovin Pro demo, while remaining a separately implemented, Cloudflare-deployable application.
+Build a polished, responsive Grobaltech Technologies website that follows the visual language, page patterns and visitor experience of the Achrovin Pro demo, while remaining a separately implemented, Cloudflare-deployable application.
 
 Reference: https://preview.desertthemes.com/pro/achrovin/
 
-## Starting point from the uploaded ZIP
-The supplied `grobaltech-app` archive is a React 19, TypeScript and Vite application with Tailwind CSS v4, React Router and Supabase JS. Its initial component structure already separates the shared shell, page routes and homepage sections:
+## Starting point
+The uploaded `grobaltech-app` archive provides React 19, TypeScript, Vite, Tailwind CSS v4, React Router and Supabase JS. Its component/page structure was reviewed and used to guide the implementation. The current repository now has a fresh Cloudflare-ready application foundation and additional portfolio routes.
 
-- Shared shell: `TopBar`, `Header`, `Layout`, `Footer`
-- Homepage sections: hero, service cards, about, services, projects, CTA, team, process, testimonials, pricing, products and contact CTA
-- Pages: home, products, product detail and contact
-- Supabase client: `src/lib/supabase.ts`
+## Progress
 
-Preserve and evolve this structure rather than replacing it with a WordPress/PHP runtime.
+### Completed in the repository
+- React 19 + TypeScript + Vite application entry and build configuration.
+- Tailwind CSS v4 and a Grobaltech design system.
+- Responsive information strip, sticky header, navigation and mobile menu.
+- Homepage hero, company introduction, services, approach, selected work and company highlights.
+- Engagement models and accessible native FAQ disclosures.
+- Scroll-triggered section reveals with reduced-motion support.
+- Solutions portfolio page and individual solution detail route.
+- Dedicated contact page and enquiry form that opens an email draft.
+- Grobaltech favicon, metadata, Cloudflare Pages configuration and SPA fallback.
+
+### Still to implement
+- Service index and individual service pages.
+- Detailed project case studies.
+- About/company profile and team pages.
+- Blog/news listing and article pages.
+- Approved company logo, real project imagery and final brand assets.
+- Secure enquiry persistence and a protected content-management interface.
+- Privacy policy, terms, accessibility and SEO refinements.
 
 ## Build sequence
 
-### 1. Foundation and responsive shell
-- Establish Grobaltech brand tokens: colors, typography, spacing, container widths, borders, shadows and button styles.
-- Implement the top information/social strip and primary navigation.
-- Add sticky header behavior, active navigation, mobile drawer, search/utility controls where appropriate.
-- Create consistent page-title/breadcrumb headers and footer widget columns.
-- Ensure keyboard navigation, visible focus states and accessible mobile controls.
+### 1. Public website experience
+Refine the reference-inspired visual system, then add service details, case studies, company profile, team and editorial pages. Keep navigation, calls to action and page layouts consistent across routes.
 
-### 2. Homepage composition
-Build the page as configurable, reusable sections in a deliberate order:
-- Hero / slider with primary and secondary calls to action
-- Company information / quick facts
-- Services and service detail links
-- Why choose us / feature highlights
-- Portfolio or projects
-- Work process
-- Team
-- Testimonials
-- Pricing or service packages
-- Latest articles/news
-- Contact CTA and enquiry details
+### 2. Content and administration
+Keep public content data-driven so copy, images, services, projects, team members and articles can be managed without editing components. Use Supabase tables with Row Level Security for persisted content and enquiries. Add a protected CMS only after the public data model and permissions are agreed.
 
-### 3. Supporting pages and interactions
-- About/company profile
-- Services index and service details
-- Portfolio index and project details
-- Team
-- Pricing
-- Blog/news listing and article details
-- Contact page with validated enquiry form
-- Products/shop pages only if Grobaltech intends to sell products
-
-### 4. Content and administration
-- Keep public content data-driven so copy, images, services, projects, team members and testimonials can later be managed without editing components.
-- Use Supabase tables with Row Level Security for persisted content and enquiries.
-- Use server-side functions for privileged operations; never expose Supabase service-role credentials in the frontend.
-- Add a protected admin/CMS only after the public site structure and data model are agreed.
-
-### 5. Cloudflare delivery
-- Frontend build: Vite `npm run build`, output `dist`.
+### 3. Cloudflare delivery
+- Frontend build: `npm run build`, output `dist`.
 - Deploy the static frontend through Cloudflare Pages.
 - Use Pages Functions or Workers for server-side endpoints, webhooks and integrations when required.
-- Configure SPA fallback/routing for React Router.
-- Set production environment variables in Cloudflare, not in committed files.
-- Validate production build, mobile layouts, metadata, accessibility and performance before launch.
+- Configure production environment variables in Cloudflare, not in committed files.
+- Validate build, routes, mobile layouts, accessibility and performance before launch.
+
+## Important security rules
+- Never expose Supabase service-role credentials in browser code or `VITE_*` variables.
+- Enquiry forms must be validated server-side before being stored.
+- CMS routes must enforce authorization in the backend, not only hide controls in the UI.
 
 ## Reference fidelity and licensing
-The reference is a commercial WordPress theme/demo. We can independently reproduce its visible layout patterns, interaction concepts and overall design direction, but should not copy its proprietary theme source, paid assets, logos, text or licensed media. Grobaltech's own identity, copy and imagery will be used throughout.
+Achrovin Pro is a commercial WordPress theme/demo. Recreate its visible layout patterns and interaction concepts independently, using Grobaltech's own identity, copy, assets and implementation. Do not copy proprietary theme source or licensed media.
 
-## Initial acceptance checklist
+## Acceptance checklist
 - [ ] All routes render and refresh correctly on Cloudflare Pages.
 - [ ] Header, navigation and footer work on mobile and desktop.
-- [ ] Homepage sections are responsive and reusable.
-- [ ] Buttons and forms perform real actions (no decorative dead controls).
-- [ ] Contact enquiries are validated and stored through a secure backend.
-- [ ] No secrets are committed or exposed in browser code.
+- [x] Homepage foundation and supporting solutions/contact routes exist.
+- [x] FAQ disclosures and mobile navigation are interactive.
+- [ ] All enquiry submissions are securely stored and reviewable.
+- [ ] All public content is editable through an authorized CMS.
 - [ ] Production build completes successfully.
+- [ ] Accessibility, SEO, performance and responsive behavior are checked before launch.
