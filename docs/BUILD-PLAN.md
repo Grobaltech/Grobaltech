@@ -22,9 +22,8 @@ The uploaded `grobaltech-app` archive provides React 19, TypeScript, Vite, Tailw
 - Grobaltech favicon, metadata, Cloudflare Pages configuration and SPA fallback.
 
 ### Still to implement
-- Service index and individual service pages.
-- Detailed project case studies.
-- About/company profile and team pages.
+- Team page with approved team profiles.
+- Detailed project outcomes and approved case-study evidence.
 - Blog/news listing and article pages.
 - Approved company logo, real project imagery and final brand assets.
 - Secure enquiry persistence and a protected content-management interface.
