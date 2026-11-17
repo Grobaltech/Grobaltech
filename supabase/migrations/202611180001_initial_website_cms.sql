@@ -241,3 +241,11 @@ create trigger site_settings_set_updated_at before update on public.site_setting
 -- After creating the first administrator in Supabase Auth, grant the role manually:
 -- insert into public.user_roles (user_id, role) values ('AUTH_USER_UUID_HERE', 'admin');
 -- Do not add a public self-service role assignment policy.
+
+-- Explicit API grants; row-level security still decides which rows each caller can access.
+grant usage on schema public to anon, authenticated;
+grant select on public.services, public.projects, public.solutions, public.team_members, public.testimonials, public.blog_posts, public.site_settings to anon, authenticated;
+grant insert, update, delete on public.services, public.projects, public.solutions, public.team_members, public.testimonials, public.blog_posts, public.site_settings to authenticated;
+grant select on public.user_roles to authenticated;
+grant insert on public.contact_leads to anon, authenticated;
+grant select, update on public.contact_leads to authenticated;
