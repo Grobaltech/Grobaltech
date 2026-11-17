@@ -8,6 +8,7 @@ import Services from './pages/Services'
 import ServiceDetail from './pages/ServiceDetail'
 import Projects from './pages/Projects'
 import ProjectDetail from './pages/ProjectDetail'
+import { supabase } from './lib/supabase'
 import {
   ArrowRight, ArrowUpRight, Menu, X, Code2, Cloud, ShieldCheck,
   Smartphone, Database, Workflow, CheckCircle2,
@@ -78,16 +79,49 @@ function ArrowDownIcon() { return <ArrowRight size={16} className="rotate-down"/
 
 function ContactForm() {
   const [sent, setSent] = useState(false)
+  const [saved, setSaved] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState('')
   const [form, setForm] = useState({name:'',email:'',service:'',message:''})
   const update = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setForm({...form,[e.target.name]:e.target.value})
-  const submit = (e: FormEvent) => {
+  const submit = async (e: FormEvent) => {
     e.preventDefault()
+    setError('')
+    setSending(true)
+    if (supabase) {
+      const { error: insertError } = await supabase.from('contact_leads').insert({
+        name: form.name.trim(),
+        email: form.email.trim(),
+        service: form.service,
+        message: form.message.trim(),
+      })
+      if (insertError) {
+        setError('We could not save your enquiry just now. Please email info@grobaltech.com and we will assist.')
+        setSending(false)
+        return
+      }
+      setSaved(true)
+      setSent(true)
+      setSending(false)
+      return
+    }
     const subject = encodeURIComponent('Website enquiry from '+form.name)
-    const body = encodeURIComponent('Name: '+form.name+'\nEmail: '+form.email+'\nService: '+form.service+'\n\n'+form.message)
+    const body = encodeURIComponent('Name: '+form.name+'\\nEmail: '+form.email+'\\nService: '+form.service+'\\n\\n'+form.message)
     window.location.href = 'mailto:info@grobaltech.com?subject='+subject+'&body='+body
     setSent(true)
+    setSending(false)
   }
-  return <form className="contact-form" onSubmit={submit}><div className="form-heading"><span>01 / START HERE</span><h3>Tell us about your project</h3></div><label>Your name<input required name="name" value={form.name} onChange={update} placeholder="How should we call you?"/></label><label>Email address<input required type="email" name="email" value={form.email} onChange={update} placeholder="you@company.com"/></label><label>What do you need help with?<select required name="service" value={form.service} onChange={update}><option value="">Select a service</option>{services.map(s=><option key={s.no}>{s.title}</option>)}<option>Something else</option></select></label><label>Tell us a little about it<textarea required rows={3} name="message" value={form.message} onChange={update} placeholder="A few details about what you have in mind..."/></label><button className="button form-submit" type="submit">{sent ? 'Open your email app' : 'Send enquiry'} <Send size={16}/></button><small className="form-note">Your email app will open with your enquiry ready to send.</small></form>
+  return <form className="contact-form" onSubmit={submit}>
+    <div className="form-heading"><span>01 / START HERE</span><h3>Tell us about your project</h3></div>
+    <label>Your name<input required name="name" value={form.name} onChange={update} placeholder="How should we call you?"/></label>
+    <label>Email address<input required type="email" name="email" value={form.email} onChange={update} placeholder="you@company.com"/></label>
+    <label>What do you need help with?<select required name="service" value={form.service} onChange={update}><option value="">Select a service</option>{services.map(s=><option key={s.no}>{s.title}</option>)}<option>Something else</option></select></label>
+    <label>Tell us a little about it<textarea required rows={3} name="message" value={form.message} onChange={update} placeholder="A few details about what you have in mind..."/></label>
+    {error && <p className="form-error" role="alert">{error}</p>}
+    {sent && <p className="form-success" role="status">{saved ? 'Thank you. Your enquiry has been received.' : 'Your email application should open with your enquiry ready to send.'}</p>}
+    <button className="button form-submit" type="submit" disabled={sending}>{sending ? 'Sending enquiry…' : 'Send enquiry'} <Send size={16}/></button>
+    <small className="form-note">{supabase ? 'Your enquiry will be sent securely to our website inbox.' : 'Email delivery will open your email application until the website database is connected.'}</small>
+  </form>
 }
 
 export default function App() {
