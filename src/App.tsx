@@ -93,6 +93,7 @@ function ContactForm() {
 export default function App() {
   const location = useLocation()
   useEffect(() => {
+    if (!('IntersectionObserver' in window)) return
     document.documentElement.classList.add('motion-ready')
     const targets = document.querySelectorAll<HTMLElement>('main > .section, main > .page-hero, main > .dark-band, main > .stats-band, main > .intro-strip')
     const observer = new IntersectionObserver((entries) => {
